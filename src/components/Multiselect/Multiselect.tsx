@@ -31,7 +31,9 @@ interface MultiselectProps {
   disabled?: boolean;
   loading?: boolean;
   loadingIcon?: ReactNode;
-  inputClassName?: string;
+  inputProps?: {
+    [key: string]: string;
+  };
   inputContainerClassName?: string;
   choices?: ChoiceItem[];
   defaultSelecteds?: ChoiceItem[];
@@ -49,7 +51,7 @@ interface MultiselectProps {
 }
 const Multiselect = ({
   open = false,
-  inputClassName = "",
+  inputProps = {},
   inputContainerClassName = "",
   suffix = "",
   disabled = false,
@@ -225,12 +227,12 @@ const Multiselect = ({
           <div className={showClass("react-multiselect-input")}>
             <input
               type="text"
-              className={inputClassName}
               onChange={handleInputChange}
               onFocus={handleInputFocused}
               ref={inputRef}
               value={inputVal}
               disabled={disabled}
+              {...inputProps}
             />
           </div>
           <FilteredChoices
