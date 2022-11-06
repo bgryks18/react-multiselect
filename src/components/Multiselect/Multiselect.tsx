@@ -127,6 +127,11 @@ const Multiselect = ({
     }
   };
 
+  const handleInputFocused = (e: FocusEvent<HTMLInputElement>) => {
+    e.stopPropagation();
+    if (disabled || isOpen) return;
+    setIsOpen(true);
+  };
   useEffect(() => {
     if (inputVal) {
       if (!isOpen) {
@@ -222,9 +227,7 @@ const Multiselect = ({
               type="text"
               className={inputClassName}
               onChange={handleInputChange}
-              onFocus={(e) => {
-                e.stopPropagation();
-              }}
+              onFocus={handleInputFocused}
               ref={inputRef}
               value={inputVal}
               disabled={disabled}

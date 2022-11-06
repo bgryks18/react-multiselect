@@ -20,6 +20,7 @@ div[class^="react-multiselect-input-container"] {
   border: 0.1px solid $gray;
   column-gap: 5px;
   border-radius: var(--borderRadius);
+  background-color: white;
   cursor: text;
   &:focus {
     border: 0.1px solid $darkGray;
@@ -78,13 +79,13 @@ div[class^="react-multiselect-input-container"] {
       width: 100%;
       display: flex;
       input {
+        background-color: white;
         border: 0;
         width: 100%;
         outline: 0;
       }
     }
     div[class^="react-multiselect-result-container"] {
-      cursor: pointer;
       min-height: 50px;
       max-height: 150px;
       overflow-y: scroll;
@@ -95,11 +96,11 @@ div[class^="react-multiselect-input-container"] {
       left: 0;
       top: 100%;
       width: 100%;
-      align-items: center;
       animation: showBox 0.1s forwards;
       border: 0.1px solid $gray;
       border-top: 0;
       margin-top: 1px;
+      background-color: white;
       &::-webkit-scrollbar {
         width: 5px;
         position: absolute;
