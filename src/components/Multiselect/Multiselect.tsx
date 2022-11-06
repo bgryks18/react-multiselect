@@ -1,14 +1,16 @@
-import React, {
-  useId,
+import {
+  ReactNode,
+  BaseSyntheticEvent,
+  FocusEvent,
   useCallback,
   useEffect,
   useRef,
   useState,
-  useDeferredValue,
+  useMemo,
 } from "react";
 import { FaTimes } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import "./Multiselect.css";
+import "./Multiselect.scss";
 import FilteredChoices from "./FilteredChoices";
 import Selecteds from "./Selecteds";
 
@@ -18,36 +20,38 @@ export interface ChoiceItem {
 }
 
 const Loading = () => {
-  return <div className={"react-multiselect-x-loading-icon"}></div>;
+  return <div className={"react-multiselect-loading-icon"}></div>;
 };
 interface MultiselectProps {
   open?: boolean;
   optionId?: string;
   optionText?: string;
   disabledItem?: string;
-  prefix?: string;
+  suffix?: string;
   disabled?: boolean;
   loading?: boolean;
-  loadingIcon?: React.ReactNode;
-  className?: string;
+  loadingIcon?: ReactNode;
+  inputClassName?: string;
+  inputContainerClassName?: string;
   choices?: ChoiceItem[];
   defaultSelecteds?: ChoiceItem[];
   showStyle?: "items" | "numbers";
-  selectedItemDeleteIcon?: React.ReactNode;
-  clearAllIcon?: React.ReactNode;
-  menuUpIcon?: React.ReactNode;
-  menuDownIcon?: React.ReactNode;
-  noContentMessage?: string | React.ReactNode;
+  selectedItemDeleteIcon?: ReactNode;
+  clearAllIcon?: ReactNode;
+  menuUpIcon?: ReactNode;
+  menuDownIcon?: ReactNode;
+  noContentMessage?: string | ReactNode;
   scrollRequestItemCount?: number;
-  showSelectedMessage?: (items: ChoiceItem[]) => string | React.ReactNode;
+  showSelectedMessage?: (items: ChoiceItem[]) => string | ReactNode;
   onSelectedsChange?: (items: ChoiceItem[]) => void;
   onInputValChange?: (val: string) => void | string;
   onScrollBottom?: (items: ChoiceItem[]) => void;
 }
 const Multiselect = ({
   open = false,
-  className = "",
-  prefix = "",
+  inputClassName = "",
+  inputContainerClassName = "",
+  suffix = "",
   disabled = false,
   loading = false,
   loadingIcon = <Loading />,
@@ -72,11 +76,10 @@ const Multiselect = ({
   const [inputVal, setInputVal] = useState("");
   const [isOpen, setIsOpen] = useState(disabled ? false : open);
   const [selecteds, setSelecteds] = useState<ChoiceItem[]>(defaultSelecteds);
-  const inputId = useId();
   const inputRef = useRef<null | HTMLInputElement>(null);
 
   const handleInputChange = useCallback(
-    (e: React.BaseSyntheticEvent) => {
+    (e: BaseSyntheticEvent) => {
       if (disabled) return;
       setInputVal(e.target.value);
     },
@@ -91,12 +94,12 @@ const Multiselect = ({
     [inputVal, setInputVal]
   );
 
-  const handleContainerFocused = (e: React.FocusEvent<HTMLDivElement>) => {
+  const handleContainerFocused = (e: FocusEvent<HTMLDivElement>) => {
     if (disabled) return;
     setIsOpen(true);
   };
 
-  const handleContainerBlurred = (e: React.FocusEvent<HTMLDivElement>) => {
+  const handleContainerBlurred = (e: FocusEvent<HTMLDivElement>) => {
     if (e.relatedTarget) return;
     if (disabled) return;
     if (inputVal) {
@@ -118,7 +121,7 @@ const Multiselect = ({
     setInputVal("");
   };
 
-  const setInputFocused = (e: React.SyntheticEvent) => {
+  const setInputFocused = (e: FocusEvent<HTMLDivElement>) => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
@@ -148,15 +151,12 @@ const Multiselect = ({
     getInputValChange(inputVal);
   }, [inputVal]);
 
-  // const choicesItemIds = useDeferredValue(
-  //   choices.map((choiceItem) => choiceItem[optionId])
-  // );
+  const selectedItemIds = useMemo(() => {
+    return selecteds.map((selectedItem) => selectedItem[optionId]);
+  }, [selecteds]);
 
-  const selectedItemIds = useDeferredValue(
-    selecteds.map((selectedItem) => selectedItem[optionId])
-  );
-  const filteredChoices = useDeferredValue(
-    inputVal
+  const filteredChoices = useMemo(() => {
+    return inputVal
       ? choices
           .filter((choiceItem) => choiceItem[optionText].includes(inputVal))
           .filter(
@@ -164,10 +164,10 @@ const Multiselect = ({
           )
       : choices.filter(
           (choiceItem) => !selectedItemIds.includes(choiceItem[optionId])
-        )
-  );
+        );
+  }, [choices, inputVal, selectedItemIds]);
 
-  const showClass = (v: string) => v + "-" + prefix + " " + className;
+  const showClass = (v: string) => (suffix ? v + "-" + suffix : v);
 
   const getSelectedsChange = useCallback(
     (newSelecteds: ChoiceItem[]) => {
@@ -189,23 +189,25 @@ const Multiselect = ({
 
   return (
     <div
-      className={showClass("react-multiselect-x-container")}
+      className={showClass("react-multiselect-container")}
       onBlur={handleContainerBlurred}
       onFocus={handleContainerFocused}
       tabIndex={0}
     >
       <div
-        className={showClass("react-multiselect-x-input-container")}
+        className={`${showClass(
+          "react-multiselect-input-container"
+        )} ${inputContainerClassName}`}
         tabIndex={0}
         onFocus={setInputFocused}
       >
         <div
-          className={showClass("react-multiselect-x-input-values")}
+          className={showClass("react-multiselect-input-values")}
           tabIndex={0}
         >
           <Selecteds
             items={selecteds}
-            className={`${showClass("react-multiselect-x-button")} ${
+            className={`${showClass("react-multiselect-button")} ${
               disabled ? "disabled" : ""
             }`}
             handleDeleteFromSelecteds={(id) => handleDeleteFromSelecteds(id)}
@@ -215,11 +217,14 @@ const Multiselect = ({
             optionId={optionId}
             optionText={optionText}
           />
-          <div className={showClass("react-multiselect-x-input")}>
+          <div className={showClass("react-multiselect-input")}>
             <input
               type="text"
-              id={inputId}
+              className={inputClassName}
               onChange={handleInputChange}
+              onFocus={(e) => {
+                e.stopPropagation();
+              }}
               ref={inputRef}
               value={inputVal}
               disabled={disabled}
@@ -230,10 +235,8 @@ const Multiselect = ({
             filteredChoices={filteredChoices}
             choices={choices}
             selectedItemIds={selectedItemIds}
-            containerClassName={showClass(
-              "react-multiselect-x-result-container"
-            )}
-            itemClassName={showClass("react-multiselect-x-result-item")}
+            containerClassName={showClass("react-multiselect-result-container")}
+            itemClassName={showClass("react-multiselect-result-item")}
             handleSelect={handleSelect}
             handleDeleteFromSelecteds={handleDeleteFromSelecteds}
             showStyle={showStyle}
@@ -247,7 +250,7 @@ const Multiselect = ({
         </div>
 
         <div
-          className={`${showClass("react-multiselect-x-input-indicators")} ${
+          className={`${showClass("react-multiselect-input-indicators")} ${
             disabled ? "disabled" : ""
           }`}
           tabIndex={0}

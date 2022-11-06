@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { ReactNode, BaseSyntheticEvent, SyntheticEvent, useState } from "react";
 import { ChoiceItem } from "./Multiselect";
 
 const FilteredChoices = ({
@@ -25,7 +25,7 @@ const FilteredChoices = ({
   containerClassName: string;
   itemClassName: string;
   showStyle: "numbers" | "items";
-  noContentMessage: string | React.ReactNode;
+  noContentMessage: string | ReactNode;
   handleSelect: (id: number, text: string) => void;
   handleDeleteFromSelecteds: (id: number) => void;
   optionId: string;
@@ -41,7 +41,7 @@ const FilteredChoices = ({
         <div
           className={containerClassName}
           tabIndex={0}
-          onScroll={(e: React.BaseSyntheticEvent) => {
+          onScroll={(e: BaseSyntheticEvent) => {
             if (typeof onScrollBottom === "function") {
               const childElementHeight = Math.floor(
                 e.target.childNodes[0].getBoundingClientRect().height
@@ -83,7 +83,7 @@ const FilteredChoices = ({
                 return (
                   <div className={itemClassName} key={choicesItem[optionId]}>
                     <span
-                      onClick={(e: React.SyntheticEvent) =>
+                      onClick={(e: SyntheticEvent) =>
                         handleSelect(
                           choicesItem[optionId],
                           choicesItem[optionText]
@@ -125,7 +125,7 @@ const FilteredChoices = ({
                     key={choicesItem[optionId]}
                   >
                     <span
-                      onClick={(e: React.SyntheticEvent) =>
+                      onClick={(e: SyntheticEvent) =>
                         handleDeleteFromSelecteds(choicesItem[optionId])
                       }
                     >
@@ -137,7 +137,7 @@ const FilteredChoices = ({
                 return (
                   <div className={itemClassName} key={choicesItem[optionId]}>
                     <span
-                      onClick={(e: React.SyntheticEvent) =>
+                      onClick={(e: SyntheticEvent) =>
                         handleSelect(
                           choicesItem[optionId],
                           choicesItem[optionText]

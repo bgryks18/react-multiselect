@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode, SyntheticEvent } from "react";
 import { ChoiceItem } from "./Multiselect";
 const Selecteds = ({
   items,
@@ -14,8 +14,8 @@ const Selecteds = ({
   className: string;
   showStyle: "numbers" | "items";
   handleDeleteFromSelecteds: (id: number) => void;
-  showSelectedMessage: (items: ChoiceItem[]) => string | React.ReactNode;
-  deleteIcon: React.ReactNode;
+  showSelectedMessage: (items: ChoiceItem[]) => string | ReactNode;
+  deleteIcon: ReactNode;
   optionId: string;
   optionText: string;
 }) => {
@@ -34,7 +34,7 @@ const Selecteds = ({
               <span className="value">{selectedItem[optionText]}</span>
               <span
                 className="times"
-                onClick={(e: React.SyntheticEvent) =>
+                onClick={(e: SyntheticEvent) =>
                   handleDeleteFromSelecteds(selectedItem[optionId])
                 }
               >

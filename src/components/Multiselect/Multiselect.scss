@@ -1,0 +1,216 @@
+$gray: #c7c6c6;
+$darkGray: #949393;
+$black: #333232;
+$darkBlack: #1a1919;
+$lightRed: #ffc1c1;
+$red: #ff8585;
+$darkRed: #b11616;
+$light: #eee;
+
+div[class^="react-multiselect-input-container"] {
+  --padding: 1rem;
+  --borderRadius: 6px;
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 0.1px solid $gray;
+  column-gap: 5px;
+  border-radius: var(--borderRadius);
+  cursor: text;
+  &:focus {
+    border: 0.1px solid $darkGray;
+  }
+  div[class^="react-multiselect-input-values"] {
+    width: inherit;
+    height: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2px;
+    background-color: transparent;
+    padding: calc(var(--padding) / 3);
+    div[class^="react-multiselect-button"] {
+      display: flex;
+      border: 0.1px solid $gray;
+      background-color: $light;
+      border-radius: var(--borderRadius);
+      cursor: default;
+      span.value {
+        padding: calc(var(--padding) / 3);
+        font-size: inherit;
+      }
+      span.times {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: calc(var(--padding) / 3);
+        font-family: inherit;
+        font-size: inherit;
+        color: $black;
+        cursor: pointer;
+        border-top-right-radius: var(--borderRadius);
+        border-bottom-right-radius: var(--borderRadius);
+        &:hover {
+          background-color: $lightRed;
+          color: $darkRed;
+        }
+      }
+      &.disabled {
+        span.value {
+          color: $darkGray;
+        }
+        span.times {
+          color: $gray;
+          cursor: default;
+          &:hover {
+            background-color: $light;
+            color: $gray;
+          }
+        }
+      }
+    }
+    div[class^="react-multiselect-input"] {
+      width: 100%;
+      display: flex;
+      input {
+        border: 0;
+        width: 100%;
+        outline: 0;
+      }
+    }
+    div[class^="react-multiselect-result-container"] {
+      cursor: pointer;
+      min-height: 50px;
+      max-height: 150px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      border-radius: var(--borderRadius);
+      animation: showBox 0.1s forwards;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: 100%;
+      align-items: center;
+      animation: showBox 0.1s forwards;
+      border: 0.1px solid $gray;
+      border-top: 0;
+      margin-top: 1px;
+      &::-webkit-scrollbar {
+        width: 5px;
+        position: absolute;
+      }
+      &::-webkit-scrollbar-track {
+        background-color: $gray;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: $darkGray;
+        border-radius: 3px;
+      }
+      div[class^="react-multiselect-result-item"] {
+        span {
+          display: flex;
+          cursor: pointer;
+          transition: all 0.1s;
+          width: 100%;
+          padding: calc(var(--padding) / 3);
+          &:hover {
+            background-color: $gray;
+          }
+        }
+        &.selected {
+          background-color: $light;
+          color: $darkGray;
+        }
+        &.disabled {
+          background-color: $lightRed;
+          color: $darkRed;
+          span {
+            cursor: not-allowed;
+            &:hover {
+              background-color: $lightRed;
+            }
+          }
+        }
+      }
+      .no-content {
+        padding: calc(var(--padding) / 3);
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        transform: translateY(50%);
+        font-size: inherit;
+      }
+    }
+  }
+  div[class^="react-multiselect-input-indicators"] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    .stick {
+      width: 1px;
+      background-color: $gray;
+      height: 100%;
+      display: flex;
+    }
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      border: 0;
+      padding: calc(var(--padding) / 2.5);
+      color: $black;
+      cursor: pointer;
+      transition: all 0.1s;
+      &.times:hover {
+        color: $darkRed;
+      }
+      &.dropdown:hover {
+        color: $black;
+      }
+    }
+    &.disabled {
+      button {
+        cursor: default;
+        color: $darkGray;
+        &:hover {
+          color: $darkGray;
+        }
+      }
+    }
+    div[class^="react-multiselect-loading-icon"] {
+      padding: 0.1rem;
+      margin: 0 0.2rem;
+      border: 2px solid $light;
+      border-top: 2px solid $darkGray;
+      border-radius: 50%;
+      width: 1rem;
+      height: 1rem;
+      animation: spin 0.7s linear infinite;
+    }
+  }
+}
+
+@keyframes showBox {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
