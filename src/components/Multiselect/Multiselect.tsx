@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { FaTimes } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import "./Multiselect.min.css";
+import "./Multiselect.css";
 import FilteredChoices from "./FilteredChoices";
 import Selecteds from "./Selecteds";
 
