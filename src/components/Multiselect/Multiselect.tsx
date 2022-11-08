@@ -15,7 +15,6 @@ import FilteredChoices from "./FilteredChoices";
 import Selecteds from "./Selecteds";
 
 export interface ChoiceItem {
-  [id: number]: any;
   [value: string]: any;
 }
 
