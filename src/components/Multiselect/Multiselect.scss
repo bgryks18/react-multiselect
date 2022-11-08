@@ -155,6 +155,7 @@ div[class^="react-multiselect-input-container"] {
     height: 100%;
     .stick {
       width: 1px;
+      content: "";
       background-color: $gray;
       height: 100%;
       display: flex;

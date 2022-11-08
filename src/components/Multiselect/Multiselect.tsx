@@ -312,7 +312,7 @@ const Multiselect = ({
               >
                 {clearAllIcon}
               </button>
-              <div className="stick"></div>
+              <div className="stick">&nbsp;</div>
               <button
                 className="dropdown"
                 onClick={() => !disabled && setIsOpen(!isOpen)}
