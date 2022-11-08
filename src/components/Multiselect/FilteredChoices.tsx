@@ -15,7 +15,7 @@ const FilteredChoices = ({
   optionId,
   optionText,
   disabledItem,
-  scrollRequestItemCount,
+  itemCountToScrollFunction,
   onScrollBottom,
 }: {
   isOpen: boolean;
@@ -31,7 +31,7 @@ const FilteredChoices = ({
   optionId: string;
   optionText: string;
   disabledItem: string;
-  scrollRequestItemCount: number;
+  itemCountToScrollFunction: number;
   onScrollBottom?: (items: ChoiceItem[]) => void;
 }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -47,7 +47,8 @@ const FilteredChoices = ({
                 e.target.childNodes[0].getBoundingClientRect().height
               );
 
-              const requestPoint = scrollRequestItemCount * childElementHeight;
+              const requestPoint =
+                itemCountToScrollFunction * childElementHeight;
 
               const isScrollBottom =
                 Math.floor(

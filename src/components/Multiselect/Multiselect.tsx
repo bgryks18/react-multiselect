@@ -42,7 +42,7 @@ interface MultiselectProps {
   menuUpIcon?: ReactNode;
   menuDownIcon?: ReactNode;
   noContentMessage?: string | ReactNode;
-  scrollRequestItemCount?: number;
+  itemCountToScrollFunction?: number;
   showSelectedMessage?: (items: ChoiceItem[]) => string | ReactNode;
   onSelectedsChange?: (items: ChoiceItem[]) => void;
   onInputValChange?: (val: string) => void | string;
@@ -67,7 +67,7 @@ const Multiselect = ({
   menuUpIcon = <IoIosArrowUp />,
   menuDownIcon = <IoIosArrowDown />,
   noContentMessage = "No Content",
-  scrollRequestItemCount = 3,
+  itemCountToScrollFunction = 3,
   showSelectedMessage = (items: ChoiceItem[]) =>
     items.length + " items selected",
   onSelectedsChange,
@@ -250,7 +250,7 @@ const Multiselect = ({
             optionId={optionId}
             optionText={optionText}
             disabledItem={disabledItem}
-            scrollRequestItemCount={scrollRequestItemCount}
+            itemCountToScrollFunction={itemCountToScrollFunction}
             onScrollBottom={onScrollBottom}
           />
         </div>

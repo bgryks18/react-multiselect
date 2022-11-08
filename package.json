@@ -1,6 +1,6 @@
 {
   "name": "@bgryks/react-multiselect",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Bugra Yuksel",
   "description": "Multiselect component for reactjs",
   "scripts": {
