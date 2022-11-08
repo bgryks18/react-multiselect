@@ -8,8 +8,6 @@ import {
   useState,
   useMemo,
 } from "react";
-import { FaTimes } from "react-icons/fa";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import "./Multiselect.scss";
 import FilteredChoices from "./FilteredChoices";
 import Selecteds from "./Selecteds";
@@ -17,7 +15,47 @@ import Selecteds from "./Selecteds";
 export interface ChoiceItem {
   [value: string]: any;
 }
+const MenuUp = () => (
+  <svg
+    stroke="currentColor"
+    fill="currentColor"
+    stroke-width="0"
+    viewBox="0 0 512 512"
+    height="1em"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M256 217.9L383 345c9.4 9.4 24.6 9.4 33.9 0 9.4-9.4 9.3-24.6 0-34L273 167c-9.1-9.1-23.7-9.3-33.1-.7L95 310.9c-4.7 4.7-7 10.9-7 17s2.3 12.3 7 17c9.4 9.4 24.6 9.4 33.9 0l127.1-127z"></path>
+  </svg>
+);
 
+const MenuDown = () => (
+  <svg
+    stroke="currentColor"
+    fill="currentColor"
+    stroke-width="0"
+    viewBox="0 0 512 512"
+    height="1em"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z"></path>
+  </svg>
+);
+
+const MenuTimes = () => (
+  <svg
+    stroke="currentColor"
+    fill="currentColor"
+    stroke-width="0"
+    viewBox="0 0 352 512"
+    height="1em"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>
+  </svg>
+);
 const Loading = () => {
   return <div className="react-multiselect-loading"></div>;
 };
@@ -62,10 +100,10 @@ const Multiselect = ({
   choices = [],
   defaultSelected = "default",
   showStyle = "items",
-  selectedItemDeleteIcon = <FaTimes />,
-  clearAllIcon = <FaTimes />,
-  menuUpIcon = <IoIosArrowUp />,
-  menuDownIcon = <IoIosArrowDown />,
+  selectedItemDeleteIcon = <MenuTimes />,
+  clearAllIcon = <MenuTimes />,
+  menuUpIcon = <MenuUp />,
+  menuDownIcon = <MenuDown />,
   noContentMessage = "No Content",
   itemCountToScrollFunction = 3,
   showSelectedMessage = (items: ChoiceItem[]) =>
