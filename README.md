@@ -6,6 +6,10 @@ Multiselect component for reactjs.
 
     npm install @bgryks/react-multiselect
 
+    or
+
+    yarn add @bgryks/react-multiselect
+
     import { Multiselect } from "@bgryks/react-multiselect"
 
 ## Type
