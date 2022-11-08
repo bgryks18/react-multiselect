@@ -25,7 +25,7 @@ div[class^="react-multiselect-input-container"] {
   &:focus {
     border: 0.1px solid $darkGray;
   }
-  div[class^="react-multiselect-input-values"] {
+  div[class^="react-multiselect-input-content"] {
     width: inherit;
     height: inherit;
     display: flex;
@@ -35,7 +35,7 @@ div[class^="react-multiselect-input-container"] {
     gap: 2px;
     background-color: transparent;
     padding: calc(var(--padding) / 3);
-    div[class^="react-multiselect-button"] {
+    div[class^="react-multiselect-input-selected-item"] {
       display: flex;
       border: 0.1px solid $gray;
       background-color: $light;
@@ -75,7 +75,7 @@ div[class^="react-multiselect-input-container"] {
         }
       }
     }
-    div[class^="react-multiselect-input"] {
+    div[class^="react-multiselect-input-textbox"] {
       width: 100%;
       display: flex;
       input {
@@ -185,7 +185,7 @@ div[class^="react-multiselect-input-container"] {
         }
       }
     }
-    div[class^="react-multiselect-loading-icon"] {
+    div.react-multiselect-loading {
       padding: 0.1rem;
       margin: 0 0.2rem;
       border: 2px solid $light;

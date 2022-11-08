@@ -20,7 +20,7 @@ export interface ChoiceItem {
 }
 
 const Loading = () => {
-  return <div className={"react-multiselect-loading-icon"}></div>;
+  return <div className="react-multiselect-loading"></div>;
 };
 interface MultiselectProps {
   open?: boolean;
@@ -209,12 +209,12 @@ const Multiselect = ({
         onFocus={setInputFocused}
       >
         <div
-          className={showClass("react-multiselect-input-values")}
+          className={showClass("react-multiselect-input-content")}
           tabIndex={0}
         >
           <Selecteds
             items={selecteds}
-            className={`${showClass("react-multiselect-button")} ${
+            className={`${showClass("react-multiselect-input-selected-item")} ${
               disabled ? "disabled" : ""
             }`}
             handleDeleteFromSelecteds={(id) => handleDeleteFromSelecteds(id)}
@@ -224,7 +224,7 @@ const Multiselect = ({
             optionId={optionId}
             optionText={optionText}
           />
-          <div className={showClass("react-multiselect-input")}>
+          <div className={showClass("react-multiselect-input-textbox")}>
             <input
               type="text"
               onChange={handleInputChange}
