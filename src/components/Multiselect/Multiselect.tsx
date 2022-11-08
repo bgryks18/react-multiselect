@@ -35,7 +35,7 @@ interface MultiselectProps {
   };
   inputContainerClassName?: string;
   choices?: ChoiceItem[];
-  defaultSelecteds?: ChoiceItem[];
+  defaultSelected?: string;
   showStyle?: "items" | "numbers";
   selectedItemDeleteIcon?: ReactNode;
   clearAllIcon?: ReactNode;
@@ -60,7 +60,7 @@ const Multiselect = ({
   optionText = "value",
   disabledItem = "disabled",
   choices = [],
-  defaultSelecteds = [],
+  defaultSelected = "default",
   showStyle = "items",
   selectedItemDeleteIcon = <FaTimes />,
   clearAllIcon = <FaTimes />,
@@ -76,7 +76,9 @@ const Multiselect = ({
 }: MultiselectProps) => {
   const [inputVal, setInputVal] = useState("");
   const [isOpen, setIsOpen] = useState(disabled ? false : open);
-  const [selecteds, setSelecteds] = useState<ChoiceItem[]>(defaultSelecteds);
+  const [selecteds, setSelecteds] = useState<ChoiceItem[]>(
+    choices.filter((choiceItem) => choiceItem[defaultSelected])
+  );
   const inputRef = useRef<null | HTMLInputElement>(null);
 
   const handleInputChange = useCallback(
