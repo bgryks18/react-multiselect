@@ -40,11 +40,11 @@ Multiselect component for reactjs.
 	    open?: boolean;
 	    optionId?: string;
 	    optionText?: string;
-		scrollRequestItemCount?: number;
-		selectedItemDeleteIcon?: ReactNode;
-		showSelectedMessage?: (items: ChoiceItem[]) => string | ReactNode;
+	    scrollRequestItemCount?: number;
+	    selectedItemDeleteIcon?: ReactNode;
+	    showSelectedMessage?: (items: ChoiceItem[]) => string | ReactNode;
 	    showStyle?: "items" | "numbers";
-		suffix?: string;
+	    suffix?: string;
     }
 ## Props
 | Name | Type  |Description|Default|
