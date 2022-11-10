@@ -89,4 +89,3 @@ Multiselect component for reactjs.
 | `.react-multiselect-result-container`    | The container element of the result of choices.                               |
 | `.react-multiselect-result-item`         | Result items of the result container.                                         |
 | `.react-multiselect-input-indicators`    | The container of the indicators containing times icon and menu icons.         |
-| `.react-multiselect-loading`             | Default loading icon.                                                         |
