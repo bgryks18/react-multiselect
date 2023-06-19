@@ -4,7 +4,9 @@
   "author": "Bugra Yuksel",
   "description": "Multiselect component for reactjs",
   "scripts": {
-    "rollup": "rollup -c --context window"
+    "rollup": "rollup -c --context window",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
@@ -29,15 +31,27 @@
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.0.6",
     "@rollup/plugin-typescript": "^8.3.0",
+    "@storybook/addon-essentials": "^7.0.22",
+    "@storybook/addon-interactions": "^7.0.22",
+    "@storybook/addon-links": "^7.0.22",
+    "@storybook/blocks": "^7.0.22",
+    "@storybook/builder-vite": "^7.0.22",
+    "@storybook/react": "^7.0.22",
+    "@storybook/react-vite": "^7.0.22",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "@types/react": "^18.0.25",
     "node-sass": "^7.0.3",
     "postcss": "^8.4.18",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "rollup": "^2.60.0",
     "rollup-plugin-dts": "^4.0.1",
     "rollup-plugin-postcss": "^4.0.2",
     "sass": "^1.56.0",
+    "storybook": "^7.0.22",
     "tslib": "^2.4.1",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "vite": "^4.3.9"
   }
 }

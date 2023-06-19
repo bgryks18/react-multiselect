@@ -1,5 +1,5 @@
 import {
-  ReactNode,
+  ReactElement,
   BaseSyntheticEvent,
   FocusEvent,
   useCallback,
@@ -59,35 +59,36 @@ const MenuTimes = () => (
 const Loading = () => {
   return <div className="react-multiselect-loading"></div>;
 };
-interface MultiselectProps {
-  open?: boolean;
+export interface MultiselectProps {
+  defaultOpen?: boolean;
   optionId?: string;
   optionText?: string;
   disabledItem?: string;
   suffix?: string;
   disabled?: boolean;
   loading?: boolean;
-  loadingIcon?: ReactNode;
-  inputProps?: {
-    [key: string]: string;
-  };
+  loadingIcon?: ReactElement;
+  inputProps?: React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >;
   inputContainerClassName?: string;
   choices?: ChoiceItem[];
   defaultSelected?: string;
   showStyle?: "items" | "numbers";
-  selectedItemDeleteIcon?: ReactNode;
-  clearAllIcon?: ReactNode;
-  menuUpIcon?: ReactNode;
-  menuDownIcon?: ReactNode;
-  noContentMessage?: string | ReactNode;
-  itemCountToScrollFunction?: number;
-  showSelectedMessage?: (items: ChoiceItem[]) => string | ReactNode;
+  deleteIcon?: ReactElement;
+  clearIcon?: ReactElement;
+  menuUpIcon?: ReactElement;
+  menuDownIcon?: ReactElement;
+  noContentMessage?: string | ReactElement;
+  countForScrollFunction?: number;
+  showSelectedMessage?: (items: ChoiceItem[]) => string | ReactElement;
   onSelectedsChange?: (items: ChoiceItem[]) => void;
   onInputValChange?: (val: string) => void | string;
   onScrollBottom?: (items: ChoiceItem[]) => void;
 }
 const Multiselect = ({
-  open = false,
+  defaultOpen = false,
   inputProps = {},
   inputContainerClassName = "",
   suffix = "",
@@ -100,12 +101,12 @@ const Multiselect = ({
   choices = [],
   defaultSelected = "default",
   showStyle = "items",
-  selectedItemDeleteIcon = <MenuTimes />,
-  clearAllIcon = <MenuTimes />,
+  deleteIcon = <MenuTimes />,
+  clearIcon = <MenuTimes />,
   menuUpIcon = <MenuUp />,
   menuDownIcon = <MenuDown />,
   noContentMessage = "No Content",
-  itemCountToScrollFunction = 3,
+  countForScrollFunction = 3,
   showSelectedMessage = (items: ChoiceItem[]) =>
     items.length + " items selected",
   onSelectedsChange,
@@ -113,7 +114,7 @@ const Multiselect = ({
   onScrollBottom,
 }: MultiselectProps) => {
   const [inputVal, setInputVal] = useState("");
-  const [isOpen, setIsOpen] = useState(disabled ? false : open);
+  const [isOpen, setIsOpen] = useState(disabled ? false : defaultOpen);
   const [selecteds, setSelecteds] = useState<ChoiceItem[]>(
     choices.filter((choiceItem) => choiceItem[defaultSelected])
   );
@@ -257,7 +258,7 @@ const Multiselect = ({
               disabled ? "disabled" : ""
             }`}
             handleDeleteFromSelecteds={(id) => handleDeleteFromSelecteds(id)}
-            deleteIcon={selectedItemDeleteIcon}
+            deleteIcon={deleteIcon}
             showStyle={showStyle}
             showSelectedMessage={showSelectedMessage}
             optionId={optionId}
@@ -288,7 +289,7 @@ const Multiselect = ({
             optionId={optionId}
             optionText={optionText}
             disabledItem={disabledItem}
-            itemCountToScrollFunction={itemCountToScrollFunction}
+            countForScrollFunction={countForScrollFunction}
             onScrollBottom={onScrollBottom}
           />
         </div>
@@ -310,7 +311,7 @@ const Multiselect = ({
                 className="times"
                 onClick={() => handleDeleteFromSelectedAll()}
               >
-                {clearAllIcon}
+                {clearIcon}
               </button>
               <div className="stick">&nbsp;</div>
               <button

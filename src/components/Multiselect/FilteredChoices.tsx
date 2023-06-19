@@ -1,4 +1,9 @@
-import { ReactNode, BaseSyntheticEvent, SyntheticEvent, useState } from "react";
+import {
+  BaseSyntheticEvent,
+  SyntheticEvent,
+  useState,
+  ReactElement,
+} from "react";
 import { ChoiceItem } from "./Multiselect";
 
 const FilteredChoices = ({
@@ -15,7 +20,7 @@ const FilteredChoices = ({
   optionId,
   optionText,
   disabledItem,
-  itemCountToScrollFunction,
+  countForScrollFunction,
   onScrollBottom,
 }: {
   isOpen: boolean;
@@ -25,13 +30,13 @@ const FilteredChoices = ({
   containerClassName: string;
   itemClassName: string;
   showStyle: "numbers" | "items";
-  noContentMessage: string | ReactNode;
+  noContentMessage: string | ReactElement;
   handleSelect: (id: number, text: string) => void;
   handleDeleteFromSelecteds: (id: number) => void;
   optionId: string;
   optionText: string;
   disabledItem: string;
-  itemCountToScrollFunction: number;
+  countForScrollFunction: number;
   onScrollBottom?: (items: ChoiceItem[]) => void;
 }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -47,8 +52,7 @@ const FilteredChoices = ({
                 e.target.childNodes[0].getBoundingClientRect().height
               );
 
-              const requestPoint =
-                itemCountToScrollFunction * childElementHeight;
+              const requestPoint = countForScrollFunction * childElementHeight;
 
               const isScrollBottom =
                 Math.floor(
