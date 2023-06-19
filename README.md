@@ -23,33 +23,32 @@ Multiselect component for reactjs.
 #### `MultiselectProps`
 
     interface MultiselectProps {
-
-defaultOpen?: boolean;
-optionId?: string;
-optionText?: string;
-disabledItem?: string;
-suffix?: string;
-disabled?: boolean;
-loading?: boolean;
-loadingIcon?: ReactElement;
-inputProps?: React.DetailedHTMLProps<
-React.InputHTMLAttributes<HTMLInputElement>,
-HTMLInputElement>;
-inputContainerClassName?: string;
-choices?: ChoiceItem[];
-defaultSelected?: string;
-showStyle?: "items" | "numbers";
-deleteIcon?: ReactElement;
-clearIcon?: ReactElement;
-menuUpIcon?: ReactElement;
-menuDownIcon?: ReactElement;
-noContentMessage?: string | ReactElement;
-countForScrollFunction?: number;
-showSelectedMessage?: (items: ChoiceItem[]) => string | ReactElement;
-onSelectedsChange?: (items: ChoiceItem[]) => void;
-onInputValChange?: (val: string) => void | string;
-onScrollBottom?: (items: ChoiceItem[]) => void;
-}
+    defaultOpen?: boolean;
+    optionId?: string;
+    optionText?: string;
+    disabledItem?: string;
+    suffix?: string;
+    disabled?: boolean;
+    loading?: boolean;
+    loadingIcon?: ReactElement;
+    inputProps?: React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement>;
+    inputContainerClassName?: string;
+    choices?: ChoiceItem[];
+    defaultSelected?: string;
+    showStyle?: "items" | "numbers";
+    deleteIcon?: ReactElement;
+    clearIcon?: ReactElement;
+    menuUpIcon?: ReactElement;
+    menuDownIcon?: ReactElement;
+    noContentMessage?: string | ReactElement;
+    countForScrollFunction?: number;
+    showSelectedMessage?: (items: ChoiceItem[]) => string | ReactElement;
+    onSelectedsChange?: (items: ChoiceItem[]) => void;
+    onInputValChange?: (val: string) => void | string;
+    onScrollBottom?: (items: ChoiceItem[]) => void;
+    }
 
 ## Props
 
