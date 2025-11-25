@@ -310,6 +310,7 @@ const Multiselect = ({
               <button
                 className="times"
                 onClick={() => handleDeleteFromSelectedAll()}
+                type="button"
               >
                 {clearIcon}
               </button>
@@ -317,6 +318,7 @@ const Multiselect = ({
               <button
                 className="dropdown"
                 onClick={() => !disabled && setIsOpen(!isOpen)}
+                type="button"
               >
                 {isOpen ? menuUpIcon : menuDownIcon}
               </button>
