@@ -48,18 +48,21 @@ const FilteredChoices = ({
           tabIndex={0}
           onScroll={(e: BaseSyntheticEvent) => {
             if (typeof onScrollBottom === "function") {
-              const childElementHeight = Math.floor(
-                e.target.childNodes[0].getBoundingClientRect().height
+              let point = 0;
+              const lastNodes = Array.from(e.target.childNodes).slice(
+                -countForScrollFunction
               );
 
-              const requestPoint = countForScrollFunction * childElementHeight;
+              lastNodes.forEach((node: any) => {
+                point += node.getBoundingClientRect().height;
+              });
 
               const isScrollBottom =
                 Math.floor(
                   e.target.scrollHeight -
                     e.target.scrollTop -
                     e.target.clientHeight
-                ) <= requestPoint;
+                ) <= point;
 
               if (isScrollBottom) {
                 if (!scrolled) {
